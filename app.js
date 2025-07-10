@@ -25,7 +25,7 @@ app.get("/help",(req,res)=> {
     res.send("Page d'aide");
 });
 // Connexion à la base données
-mongoose.connect(process.env.DATABASECloud)
+mongoose.connect(process.env.DATABASECLOUD)
 .then(() => {console.log("DataBase Successfully Connected");})/*si la connection a reussi*/
 .catch(err => { console.log("Unable to connect to database", err);/*si c'est eurreur*/
 process.exit(); });
