@@ -30,7 +30,7 @@ app.use('/api/payment', paymentRouter);
 
 //dist reactjs
 app.use(express.static(path.join(__dirname, './client/build'))); // Route pourles pages non trouvées, redirige vers index.html
-app.get('*', (req, res) => { res.sendFile(path.join(__dirname,'./client/build/index.html')); });
+app.get('/{*any}', (req, res) => { res.sendFile(path.join(__dirname,'./client/build/index.html')); });
 const PORT=process.env.PORT || 3000;
 app.listen(PORT, ()=>{
     console.log(  `Server is running on port ${PORT} `);/*.log s'affiche dans le console */
