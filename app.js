@@ -6,6 +6,7 @@ const SCategorieRouter=require("./routes/scategorie.route")/*importer le fichier
 const articleRouter=require("./routes/article.route")
 const cors = require('cors')/*permet de faire des requetes entre le front et le back sans probleme de cors*/
 dotenv.config()/*tjrs on faire .config avec le dotenv pour utiliser process .env 1 pour le port et l'autre pour le database*/
+const path = require('path'); // Ajout de l'importation de path
 const app=express();
 const paymentRouter =require("./routes/payment.route.js");
 
@@ -17,13 +18,6 @@ app.get("/",(req,res)=> {
     res.send("Hello World!");/*.send s'affiche dans le site */
 
 });
-app.get("/contact",(req,res)=> {
-    res.send("Page de contact");
-
-});
-app.get("/help",(req,res)=> {
-    res.send("Page d'aide");
-});
 // Connexion à la base données
 mongoose.connect(process.env.DATABASECLOUD)
 .then(() => {console.log("DataBase Successfully Connected");})/*si la connection a reussi*/
@@ -33,6 +27,11 @@ app.use("/api/categories",categorieRouter)/*pour faire le test avec thunder clin
 app.use("/api/scategories",SCategorieRouter)
 app.use("/api/articles",articleRouter)
 app.use('/api/payment', paymentRouter);
+
+//dist reactjs
+app.use(express.static(path.join(__dirname, './client/build'))); // Route pourles pages non trouvées, redirige vers index.html
+app.get('*', (req, res) => { res.sendFile(path.join(__dirname,
+'./client/build/index.html')); });
 const PORT=process.env.PORT || 3000;
 app.listen(PORT, ()=>{
     console.log(  `Server is running on port ${PORT} `);/*.log s'affiche dans le console */
