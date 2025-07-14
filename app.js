@@ -14,10 +14,6 @@ app.use(express.json())/* */
 app.use(cors({
     origin: '*',/*permet de faire des requetes entre le front et le back sans probleme de cors:n'apporte quelle requette et origine*/
 }));/*permet de faire des requetes entre le front et le back sans probleme de cors*/
-app.get("/",(req,res)=> {
-    res.send("Hello World!");/*.send s'affiche dans le site */
-
-});
 // Connexion à la base données
 mongoose.connect(process.env.DATABASECLOUD)
 .then(() => {console.log("DataBase Successfully Connected");})/*si la connection a reussi*/
